@@ -1,0 +1,20 @@
+.main-page {
+    display: flex;
+}
+.main-form {
+    width: 1000px;
+    background-color: #18181B;
+    padding: 10px;
+}
+.detail {
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+}
+.link {
+    margin-top: 15px;
+    color: #2E7FF1;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}

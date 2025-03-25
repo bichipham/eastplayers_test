@@ -1,6 +1,7 @@
+import AppointmentPage from "src/page/AppointmentPage";
 
-function AppointmentPage({ params }) {
-  return <p>hello</p>
+function Appointment({ params }) {
+  return <AppointmentPage />
 }
 
-export default AppointmentPage;
+export default Appointment;

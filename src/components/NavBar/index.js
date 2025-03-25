@@ -7,9 +7,11 @@ import ico_rules from "@/assets/images/dollar.svg";
 import ico_appointment from "@/assets/images/CalendarBlank.svg";
 import ico_inventory from "@/assets/images/package.svg";
 import ico_contact from "@/assets/images/User.svg";
-import ico_transaction from "@/assets/images/transaction.svg";
-import ico_invoice from "@/assets/images/invoice.svg";
+import ico_transaction from "@/assets/images/dollar.svg";
+import ico_invoice from "@/assets/images/Newspaper.svg";
+import ico_logo from "@/assets/images/Logo.png";
 import Image from "next/image";
+import "./style.css";
 
 const NavBar = () => {
   const items = [
@@ -43,11 +45,11 @@ const NavBar = () => {
       icon: <Image src={ico_contact} width={20} height={20} />,
       label: <span>Contacts</span>,
     },
-		{
-      key: "transaction",
-      icon: <Image src={ico_transaction} width={20} height={20} />,
-      label: <span>Contacts</span>,
-    },
+		// {
+    //   key: "transaction",
+    //   icon: <Image src={ico_contact} width={20} height={20} />,
+    //   label: <span>Transaction</span>,
+    // },
 		{
       key: "invoice",
       icon: <Image src={ico_invoice} width={20} height={20} />,
@@ -55,8 +57,9 @@ const NavBar = () => {
     },
   ];
   return (
-    <div>
-      <Menu items={items} mode="vertical" />
+    <div className="left-menu">
+      <div className="logo" ><Image src={ico_logo} width={250} /></div>
+      <Menu className="nav_menu" items={items} mode="vertical" style={{marginTop: '10px'}} />
     </div>
   );
 };

@@ -1,0 +1,42 @@
+
+.left-menu {
+    max-height: calc(100vh - 150px);
+    overflow: auto;
+    background-color: black;
+    width: 300px
+}
+
+.logo {
+    margin-left: 10px;
+    margin-top: 5px;
+    height: 70px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.left-menu::-webkit-scrollbar {
+    width: 0px;
+    border-radius: 0px;
+}
+
+/* Track */
+.left-menu::-webkit-scrollbar-track {
+    background: #F2F4F5;
+}
+
+/* Handle */
+.left-menu::-webkit-scrollbar-thumb {
+    background: #9529CE;
+}
+
+/* Handle on hover */
+.left-menu::-webkit-scrollbar-thumb:hover {
+    background: #9529CE;
+}
+
+.nav_menu {
+    background-color: black;
+    color: white;
+}
+.ant-menu-title-content {
+    color: white;
+}
