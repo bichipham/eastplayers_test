@@ -1,0 +1,11 @@
+.layout-cols {
+    margin-top: 72px;
+    background: black
+  }
+  
+  .layout-cols-inner {
+    margin: 0 auto;
+    width: 1250px;
+    display: flex;
+    position: relative;
+  }
