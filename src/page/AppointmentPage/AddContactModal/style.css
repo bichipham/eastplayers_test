@@ -1,0 +1,39 @@
+.popup-main .ant-modal-body {
+    overflow: hidden !important;
+    height: auto;
+    max-height: inherit !important;
+    border-radius: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    
+}
+
+.popup-main .ant-modal-content {
+    box-shadow: none;
+    background: black;
+
+}
+.popup-main p {
+    color: white;
+}
+
+.popup-main  .ant-input-outlined {
+    background-color: #2F323E;
+    border: none;
+    color: white
+}
+
+.action {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 2px;
+}
+
+.title {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

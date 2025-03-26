@@ -32,33 +32,33 @@ const NavBar = () => {
     },
     {
       key: "appointment",
-      icon: <Image src={ico_appointment} width={20} height={20} />,
+      icon: <Image src={ico_appointment} width={20} height={20} alt=""  />,
       label: <Link href="/appointment">Appointments</Link>,
     },
     {
       key: "inventory",
-      icon: <Image src={ico_inventory} width={20} height={20} />,
+      icon: <Image src={ico_inventory} width={20} height={20} alt=""  />,
       label: <span>Inventory</span>,
     },
 		{
       key: "contact",
-      icon: <Image src={ico_contact} width={20} height={20} />,
+      icon: <Image src={ico_contact} width={20} height={20} alt=""  />,
       label: <span>Contacts</span>,
     },
-		// {
-    //   key: "transaction",
-    //   icon: <Image src={ico_contact} width={20} height={20} />,
-    //   label: <span>Transaction</span>,
-    // },
+		{
+      key: "transaction",
+      icon: <Image src={ico_contact} width={20} height={20} alt="" />,
+      label: <span>Transaction</span>,
+    },
 		{
       key: "invoice",
-      icon: <Image src={ico_invoice} width={20} height={20} />,
+      icon: <Image src={ico_invoice} width={20} height={20} alt=""  />,
       label: <span>Invoices</span>,
     },
   ];
   return (
     <div className="left-menu">
-      <div className="logo" ><Image src={ico_logo} width={250} /></div>
+      <div className="logo" ><Image src={ico_logo} width={250} alt=""  /></div>
       <Menu className="nav_menu" items={items} mode="vertical" style={{marginTop: '10px'}} />
     </div>
   );

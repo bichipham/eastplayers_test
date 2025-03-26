@@ -11,8 +11,15 @@ import {
   Button,
 } from "antd";
 import "./style.css";
-const FormItem = Form.Item;
+import ico_add from '@/assets/images/ButtonAdd.png';
+import Image from "next/image";
+import { useAppointment } from "./hook";
+import { AddcontactModal } from "./AddContactModal";
+
 const AppointmentPage = () => {
+  const {
+    contactModal
+  } = useAppointment();
   return (
     <div className="main-page">
       {" "}
@@ -20,9 +27,11 @@ const AppointmentPage = () => {
         <h2 className="mh_ttl">Client information</h2>
         <Form>
           <p>Contact</p>
-          <Form.Item name="contavt">
+          <div style={{display: 'flex'}}>
+          <Form.Item name="contact">
             <Select
               placeholder="Select"
+              style={{width: '850px'}}
               // onChange={(value) => onSelectCity(value, "city")}
               //   optionFilterProp="children"
               //   filterOption={(input, option) =>
@@ -36,6 +45,8 @@ const AppointmentPage = () => {
             ))} */}
             </Select>
           </Form.Item>
+          <Image src={ico_add} width={40} alt="" onClick={contactModal.show} style={{cursor: 'pointer'}} />
+          </div>
 
           <h3 className="sh_ttl">Vericle Detail</h3>
           <div className="detail">
@@ -88,6 +99,10 @@ const AppointmentPage = () => {
           ]}
         />
       </div>
+      <AddcontactModal 
+        showing={contactModal.isShowing}
+        onClose={contactModal.hide}
+      />
     </div>
   );
 };
