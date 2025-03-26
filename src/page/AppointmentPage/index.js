@@ -7,7 +7,8 @@ import {
   InputNumber,
   Row,
   Select,
-	Button
+  Steps,
+  Button,
 } from "antd";
 import "./style.css";
 const FormItem = Form.Item;
@@ -16,6 +17,7 @@ const AppointmentPage = () => {
     <div className="main-page">
       {" "}
       <div className="main-form">
+        <h2 className="mh_ttl">Client information</h2>
         <Form>
           <p>Contact</p>
           <Form.Item name="contavt">
@@ -34,30 +36,58 @@ const AppointmentPage = () => {
             ))} */}
             </Select>
           </Form.Item>
+
+          <h3 className="sh_ttl">Vericle Detail</h3>
           <div className="detail">
-            <span>Vericle Detail</span>
-            <p>Year</p>
-            <Form.Item name="year">
-              <Select  placeholder="Select"></Select>
-            </Form.Item>
-						<p>Make</p>
-            <Form.Item name="make">
-              <Select  placeholder="Select"></Select>
-            </Form.Item>
-						<p>Modal</p>
+            <div className="col2">
+              <div className="col2-item">
+                <p>Year</p>
+                <Form.Item name="year">
+                  <Select placeholder="Select"></Select>
+                </Form.Item>
+              </div>
+              <div className="col2-item">
+                <p>Make</p>
+                <Form.Item name="make">
+                  <Select placeholder="Select"></Select>
+                </Form.Item>
+              </div>
+            </div>
+            <p>Modal</p>
             <Form.Item name="modal">
-              <Select  placeholder="Select"></Select>
+              <Select placeholder="Select"></Select>
             </Form.Item>
-						<p>Vehicle Type</p>
+            <p>Vehicle Type</p>
             <Form.Item name="type">
-              <Select  placeholder="Select"></Select>
+              <Select placeholder="Select"></Select>
             </Form.Item>
           </div>
         </Form>
-				<div className="link">Can't find a vehicle? Enter it manually.</div>
-				<Button className='btn_primary'>Next</Button>
+        <div className="link">Can't find a vehicle? Enter it manually.</div>
+        <div className="submit">
+          <Button type="primary">Next</Button>
+        </div>
       </div>
-      <div className="status">aaaaaaaaaaaa</div>
+      <div className="status">
+        <Steps
+          direction="vertical"
+          current={1}
+          items={[
+            {
+              title: "Step 1",
+              description: "Client information",
+            },
+            {
+              title: "Step 2",
+              description: "Services ",
+            },
+            {
+              title: "Step 3",
+              description: "Review & Send",
+            },
+          ]}
+        />
+      </div>
     </div>
   );
 };

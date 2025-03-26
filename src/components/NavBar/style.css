@@ -8,6 +8,7 @@
 
 .logo {
     margin-left: 10px;
+    margin-right: 10px;
     margin-top: 5px;
     height: 70px;
     border-bottom: 1px solid #d9d9d9;
@@ -18,19 +19,23 @@
     border-radius: 0px;
 }
 
-/* Track */
-.left-menu::-webkit-scrollbar-track {
-    background: #F2F4F5;
+ant-menu-light .ant-menu-item-selected{
+    background: none!important;
+    border-right: 2px solid #2E7FF1!important;
+    color: #2E7FF1!important;
+    border-radius: 0px!important;
 }
 
-/* Handle */
-.left-menu::-webkit-scrollbar-thumb {
-    background: #9529CE;
+.ant-menu-light .ant-menu-item-selected span,
+.ant-menu-light .ant-menu-item-selected a{
+    color: #2E7FF1!important;
 }
 
-/* Handle on hover */
-.left-menu::-webkit-scrollbar-thumb:hover {
-    background: #9529CE;
+
+.ant-menu-inline .ant-menu-item{
+     margin-inline: 0px!important; 
+     margin-block: 0px!important; 
+    width: 100%!important; 
 }
 
 .nav_menu {
