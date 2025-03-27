@@ -74,7 +74,7 @@ const AppointmentPage = () => {
             </Form.Item>
           </div>
         </Form>
-        <div className="link">Can't find a vehicle? Enter it manually.</div>
+        <div className="link">{`Can't find a vehicle? Enter it manually`}.</div>
         <div className="submit">
           <Button type="primary">Next</Button>
         </div>
