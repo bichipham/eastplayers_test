@@ -17,17 +17,17 @@ const NavBar = () => {
   const items = [
     {
       key: "propersal",
-      icon: <Image src={ico_propersal} width={20} height={20} />,
+      icon: <Image src={ico_propersal} width={20} height={20} alt="" />,
       label: <span>Propersal</span>,
     },
     {
       key: "service",
-      icon: <Image src={ico_service} width={20} height={20} />,
+      icon: <Image src={ico_service} width={20} height={20} alt="" />,
       label: <span>Services</span>,
     },
     {
       key: "rule",
-      icon: <Image src={ico_rules} width={20} height={20} />,
+      icon: <Image src={ico_rules} width={20} height={20} alt="" />,
       label: <span>Verhicle Rules</span>,
     },
     {

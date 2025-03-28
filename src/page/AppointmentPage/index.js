@@ -11,15 +11,16 @@ import {
   Button,
 } from "antd";
 import "./style.css";
-import ico_add from '@/assets/images/ButtonAdd.png';
+import ico_add from "@/assets/images/ButtonAdd.png";
 import Image from "next/image";
 import { useAppointment } from "./hook";
 import { AddcontactModal } from "./AddContactModal";
+import map from "lodash/map";
 
 const AppointmentPage = () => {
-  const {
-    contactModal
-  } = useAppointment();
+  const { contactModal, listContact } = useAppointment();
+  console.log('!!!!!! render listContact ', listContact);
+
   return (
     <div className="main-page">
       {" "}
@@ -27,25 +28,31 @@ const AppointmentPage = () => {
         <h2 className="mh_ttl">Client information</h2>
         <Form>
           <p>Contact</p>
-          <div style={{display: 'flex'}}>
-          <Form.Item name="contact">
-            <Select
-              placeholder="Select"
-              style={{width: '850px'}}
-              // onChange={(value) => onSelectCity(value, "city")}
-              //   optionFilterProp="children"
-              //   filterOption={(input, option) =>
-              //     option.children.toLowerCase().includes(input.toLowerCase())
-              //   }
-            >
-              {/* {listCity?.map((item, index) => (
+          <div style={{ display: "flex" }}>
+            <Form.Item name="contact">
+              <Select
+                placeholder="Select"
+                style={{ width: "850px" }}
+                // onChange={(value) => onSelectCity(value, "city")}
+                //   optionFilterProp="children"
+                //   filterOption={(input, option) =>
+                //     option.children.toLowerCase().includes(input.toLowerCase())
+                //   }
+              >
+                {/* {listCity?.map((item, index) => (
               <Select.Option key={`city_${index}`} value={JSON.stringify(item)}>
                 {item?.name}
               </Select.Option>
             ))} */}
-            </Select>
-          </Form.Item>
-          <Image src={ico_add} width={40} alt="" onClick={contactModal.show} style={{cursor: 'pointer'}} />
+              </Select>
+            </Form.Item>
+            <Image
+              src={ico_add}
+              width={40}
+              alt=""
+              onClick={contactModal.show}
+              style={{ cursor: "pointer" }}
+            />
           </div>
 
           <h3 className="sh_ttl">Vericle Detail</h3>
@@ -78,6 +85,11 @@ const AppointmentPage = () => {
         <div className="submit">
           <Button type="primary">Next</Button>
         </div>
+        {map(listContact, (item, index) => (
+          <div key={index}>
+            <p>{item?.name}</p>
+          </div>
+        ))}
       </div>
       <div className="status">
         <Steps
@@ -99,7 +111,7 @@ const AppointmentPage = () => {
           ]}
         />
       </div>
-      <AddcontactModal 
+      <AddcontactModal
         showing={contactModal.isShowing}
         onClose={contactModal.hide}
       />

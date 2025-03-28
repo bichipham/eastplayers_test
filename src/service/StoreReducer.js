@@ -1,14 +1,12 @@
-
-
 export const StoreReducer = (state, action) => {
-    let newCart = {};
-    let newState = {};
-    switch (action.type) {
-        case 'ADD_ACCOUNT':
-            return {
-                ...state,
-            };
-        default:
-            return state;
+  switch (action.type) {
+    case "GET_LIST_CONTACT": {
+			return {
+        ...state,
+				listContact: action.payload
+      };
     }
+    default:
+      return state;
+  }
 };

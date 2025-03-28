@@ -1,18 +1,17 @@
+import { MainContext } from "@/service/StoreContext";
 import { useCustomModal } from "@/util/hooks";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getListContact } from "src/actions/appointment";
 
 export const useAppointment = () => {
   const contactModal = useCustomModal();
-  const [listContact, setListcontact] = useState([]);
+  const { listContact = [], dispatchGetListContact } = useContext(MainContext);
   useEffect(() => {
-  
-    getListContact().then(data => {
-      console.log('!!!!!!1 list contact ', data);
-    });
-
+      dispatchGetListContact();
   } ,[])
+
   return {
-    contactModal,
+    listContact,
+    contactModal
   };
 };

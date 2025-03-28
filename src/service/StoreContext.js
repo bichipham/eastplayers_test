@@ -1,34 +1,53 @@
-import React, { useReducer, createContext } from 'react';
-import { StoreReducer } from './StoreReducer';
+import React, { useReducer, createContext } from "react";
+import { StoreReducer } from "./StoreReducer";
+import { fetchAPI } from "./apiService";
 const MainContext = createContext();
 
 const initialState = {
-    cartMap: new Map(),
-    orderInfo: {},
-    currentCity: {},
-    cityList: [],
-    districts: [],
-    times: [],
-    profile: {},
-    suggestions: [],
-    currentUserID: '',
-    isChangeCity: false,
+  listContact: [],
 };
-const resetState = { cartMap: new Map(), orderInfo: {}, districts: [], times: [] };
 
 const StoreProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(StoreReducer, initialState);
+  const [state, dispatch] = useReducer(StoreReducer, initialState);
 
-    const addAccount = payload => {
-        dispatch({ type: 'ADD_ACCOUNT', payload });
-    };
+  const dispatchAddContact = ({ data, callback, handleError }) => {
+    console.log("!!!!! dispatch ADD contact");
+    fetchAPI({
+      url: "/contacts",
+      payload: { method: "POST", data: data },
+    })
+      .then((res) => {
+        if (callback) callback();
+      })
+      .catch((err) => {
+        if (handleError) handleError(err);
+      });
+  };
 
-    const contextValues = {
-        addAccount,
-        ...state,
-    };
-    //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));
-    return <MainContext.Provider value={contextValues}>{children}</MainContext.Provider>;
+  const dispatchGetListContact = () => {
+    console.log("!!!!! dispatchGetListContact");
+    fetchAPI({
+      url: `/contacts`,
+      payload: { method: "GET" },
+    }).then((res) => {
+      dispatch({
+        type: `GET_LIST_CONTACT`,
+        payload: res,
+      });
+    });
+  };
+
+  const contextValues = {
+    dispatchGetListContact,
+    dispatchAddContact,
+    ...state,
+  };
+  //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));
+  return (
+    <MainContext.Provider value={contextValues}>
+      {children}
+    </MainContext.Provider>
+  );
 };
 
 export { StoreProvider, MainContext };

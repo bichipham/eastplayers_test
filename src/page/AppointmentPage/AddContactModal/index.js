@@ -1,54 +1,63 @@
-import { Button, Input, Modal, Form } from "antd";
+import { Button, Input, Modal, Form, message } from "antd";
 import "./style.css";
+import { addContact, getListContact } from "src/actions/appointment";
+import { useContext } from "react";
+import { MainContext } from "@/service/StoreContext";
 
 export const AddcontactModal = ({ showing, onClose }) => {
-	const [form] = Form.useForm();
-	const  onFinishInput = payload => {
-		const {
-			email,
-			phone,
-			name,
-			note,
-			add_phone
-		} = payload || {};
-		if (!email && !phone && !add_phone) {
-			form.setFields([
-				{
-					name: "email", // required
-					errors: ["Please enter at least one field: email or phone number."],
-				},
-				{
-					name: "phone", // required
-					errors: ["Please enter at least one field: email or phone number."],
-				},
-				{
-					name: "add_phone", // required
-					errors: ["Please enter at least one field: email or phone number."],
-				},
-			])
-			return;
-		}
-		console.log(payload);
-		onClose();
-	}
+  const [form] = Form.useForm();
+  const { dispatchAddContact, dispatchGetListContact } = useContext(MainContext);
+  const onFinishInput = (payload) => {
+    const { email, phone, name, note, add_phone } = payload || {};
+    if (!email && !phone && !add_phone) {
+      form.setFields([
+        {
+          name: "email", // required
+          errors: ["Please enter at least one field: email or phone number."],
+        },
+        {
+          name: "phone", // required
+          errors: ["Please enter at least one field: email or phone number."],
+        },
+        {
+          name: "add_phone", // required
+          errors: ["Please enter at least one field: email or phone number."],
+        },
+      ]);
+      return;
+    }
+    console.log('!!!!!! add contact ' ,payload);
+    dispatchAddContact({
+      data: payload,
+      callback: res => {
+        message.info("Action Success");
+        dispatchGetListContact();
+      },
+      handleError: err => {
+        message.error("Action Fail");
+      }
+    })
+    onClose();
+  };
 
   return (
     <Modal
       centered
       className="popup-main"
-      visible={showing}
+      open={showing}
       onCancel={onClose}
       width={400}
       closable={false}
       footer={null}
-      maskStyle={{ backgroundColor: "rgba(0, 0, 0, 0.15)" }}
-      bodyStyle={{
+      styles={{
         maxHeight: "700px",
       }}
     >
-      <h2 className="title" >Add Contact</h2>
-      <Form  onFinish={onFinishInput} form={form}> 
-        <p style={{marginBottom: '10px'}} >Please enter at least one field: email or phone number.</p>
+      <h2 className="title">Add Contact</h2>
+      <Form onFinish={onFinishInput} form={form}>
+        <p style={{ marginBottom: "10px" }}>
+          Please enter at least one field: email or phone number.
+        </p>
         <p>Name</p>
         <Form.Item
           name="name"
@@ -89,7 +98,9 @@ export const AddcontactModal = ({ showing, onClose }) => {
           <Button type="primary" color="blue" ghost onClick={onClose}>
             Cancel
           </Button>
-          <Button type="primary" htmlType='submit'>Save</Button>
+          <Button type="primary" htmlType="submit">
+            Save
+          </Button>
         </div>
       </Form>
     </Modal>

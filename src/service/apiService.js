@@ -1,5 +1,3 @@
-
-
 export const fetchAPI = async ({ url, payload }) => {
   const fullUrl = `${process.env.NEXT_PUBLIC_API_DOMAIN}${url}`;
   const headers = {
@@ -8,10 +6,9 @@ export const fetchAPI = async ({ url, payload }) => {
   };
 
   const requestData = {
-    ...payload,
-    headers: {
-      ...headers
-    },
+    body: payload?.method == 'POST' ? JSON.stringify(payload?.data) : undefined,
+    method: payload?.method,
+    headers: headers
   };
   try {
     const res = await fetch(fullUrl, requestData);
@@ -30,7 +27,12 @@ export const fetchAPI = async ({ url, payload }) => {
       } else return data;
     }
   } catch (e) {
-    console.log("[ERROR] API Request for url= %s ; RequestData= %s ; Error= %s", fullUrl, JSON.stringify(requestData), e);
+    console.log(
+      "[ERROR] API Request for url= %s ; RequestData= %s ; Error= %s",
+      fullUrl,
+      JSON.stringify(requestData),
+      e
+    );
     return {};
   }
 };
