@@ -37,8 +37,22 @@ const StoreProvider = ({ children }) => {
     });
   };
 
+  const dispatchGetVehicleInfo = () => {
+    console.log("!!!!! dispatchGetVerhicleInfo");
+    fetchAPI({
+      url: `/vehicleInfo`,
+      payload: { method: "GET" },
+    }).then((res) => {
+      dispatch({
+        type: `GET_VEHICLE_INFO`,
+        payload: res,
+      });
+    });
+  };
+
   const contextValues = {
     dispatchGetListContact,
+    dispatchGetVehicleInfo,
     dispatchAddContact,
     ...state,
   };

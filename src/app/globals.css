@@ -28,3 +28,59 @@ body {
 * {
   color: white
 }
+
+
+.action-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 2px;
+}
+
+
+.title-h1 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.tableFixHead table thead th.text-left {
+  text-align: left;
+}
+
+.tableFixHead table thead th.text-right {
+  text-align: right;
+}
+
+.tableFixHead table tbody td {
+  vertical-align: top;
+  border: 1px solid #F1F1F1;
+  padding: 10px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #5C5C5C;
+}
+
+th {
+  background-color: #212226;
+  height: 60px;
+}
+
+td {
+  height: 60px;
+}
+
+table tbody td.text-left {
+  text-align: left;
+}
+
+table .w150 {
+  width: 150px;
+}
+
+table .w200 {
+  width: 200px;
+}
+

@@ -14,82 +14,87 @@ import "./style.css";
 import ico_add from "@/assets/images/ButtonAdd.png";
 import Image from "next/image";
 import { useAppointment } from "./hook";
-import { AddcontactModal } from "./AddContactModal";
+import AddcontactModal from "./AddContactModal";
 import map from "lodash/map";
+import SelectContactModal from "./SelectContactModal";
 
 const AppointmentPage = () => {
-  const { contactModal, listContact } = useAppointment();
-  console.log('!!!!!! render listContact ', listContact);
+  const { contactModal, getContactModal, listContact, vehicleInfo } =
+    useAppointment();
+  console.log("!!!!!! render listContact ", vehicleInfo);
+  const {
+    year: listYear = [],
+    make: listMake = [],
+    type: listType = [],
+    modal: listModal = [],
+  } = vehicleInfo || {};
 
   return (
     <div className="main-page">
       {" "}
       <div className="main-form">
         <h2 className="mh_ttl">Client information</h2>
-        <Form>
-          <p>Contact</p>
-          <div style={{ display: "flex" }}>
-            <Form.Item name="contact">
+        <p>Contact</p>
+        <div>
+          {/* <Select className="f-lft" onClick={getContactModal.show}></Select> */}
+          <div className="div__left" onClick={getContactModal.show} />
+          <Image
+            src={ico_add}
+            width={40}
+            alt=""
+            onClick={contactModal.show}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+
+        <h3 className="sh_ttl">Vericle Detail</h3>
+        <div className="detail">
+          <div className="col2">
+            <div className="col2-item">
+              <p>Year</p>
               <Select
                 placeholder="Select"
-                style={{ width: "850px" }}
-                // onChange={(value) => onSelectCity(value, "city")}
-                //   optionFilterProp="children"
-                //   filterOption={(input, option) =>
-                //     option.children.toLowerCase().includes(input.toLowerCase())
-                //   }
-              >
-                {/* {listCity?.map((item, index) => (
-              <Select.Option key={`city_${index}`} value={JSON.stringify(item)}>
-                {item?.name}
-              </Select.Option>
-            ))} */}
-              </Select>
-            </Form.Item>
-            <Image
-              src={ico_add}
-              width={40}
-              alt=""
-              onClick={contactModal.show}
-              style={{ cursor: "pointer" }}
-            />
-          </div>
-
-          <h3 className="sh_ttl">Vericle Detail</h3>
-          <div className="detail">
-            <div className="col2">
-              <div className="col2-item">
-                <p>Year</p>
-                <Form.Item name="year">
-                  <Select placeholder="Select"></Select>
-                </Form.Item>
-              </div>
-              <div className="col2-item">
-                <p>Make</p>
-                <Form.Item name="make">
-                  <Select placeholder="Select"></Select>
-                </Form.Item>
-              </div>
+                style={{ width: 300, backgroundColor: "#2F323E" }}
+                options={map(listYear, (item, index) => {
+                  return { key: index, value: item };
+                })}
+              />
             </div>
-            <p>Modal</p>
-            <Form.Item name="modal">
-              <Select placeholder="Select"></Select>
-            </Form.Item>
-            <p>Vehicle Type</p>
-            <Form.Item name="type">
-              <Select placeholder="Select"></Select>
-            </Form.Item>
+            <div className="col2-item">
+              <p>Make</p>
+              <Form.Item name="make">
+                <Select
+                  placeholder="Select"
+                  options={map(listYear, (item, index) => {
+                    return { key: index, value: item };
+                  })}
+                />
+              </Form.Item>
+            </div>
           </div>
-        </Form>
+          <p>Modal</p>
+
+          <Select
+            placeholder="Select"
+            options={map(listYear, (item, index) => {
+              return { key: index, value: item };
+            })}
+          />
+
+          <p>Vehicle Type</p>
+
+          <Select
+            placeholder="Select"
+            options={map(listYear, (item, index) => {
+              return { key: index, value: item };
+            })}
+          />
+        </div>
+
         <div className="link">{`Can't find a vehicle? Enter it manually`}.</div>
         <div className="submit">
           <Button type="primary">Next</Button>
         </div>
-        {map(listContact, (item, index) => (
-          <div key={index}>
-            <p>{item?.name}</p>
-          </div>
-        ))}
       </div>
       <div className="status">
         <Steps
@@ -114,6 +119,10 @@ const AppointmentPage = () => {
       <AddcontactModal
         showing={contactModal.isShowing}
         onClose={contactModal.hide}
+      />
+      <SelectContactModal
+        showing={getContactModal.isShowing}
+        onClose={getContactModal.hide}
       />
     </div>
   );

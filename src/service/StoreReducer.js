@@ -6,6 +6,12 @@ export const StoreReducer = (state, action) => {
 				listContact: action.payload
       };
     }
+    case "GET_VEHICLE_INFO": {
+      return {
+        ...state,
+				vehicleInfo: action.payload
+      };
+    }
     default:
       return state;
   }

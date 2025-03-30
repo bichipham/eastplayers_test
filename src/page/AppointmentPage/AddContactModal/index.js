@@ -1,10 +1,9 @@
 import { Button, Input, Modal, Form, message } from "antd";
 import "./style.css";
-import { addContact, getListContact } from "src/actions/appointment";
 import { useContext } from "react";
 import { MainContext } from "@/service/StoreContext";
 
-export const AddcontactModal = ({ showing, onClose }) => {
+const AddcontactModal = ({ showing, onClose }) => {
   const [form] = Form.useForm();
   const { dispatchAddContact, dispatchGetListContact } = useContext(MainContext);
   const onFinishInput = (payload) => {
@@ -47,13 +46,13 @@ export const AddcontactModal = ({ showing, onClose }) => {
       open={showing}
       onCancel={onClose}
       width={400}
-      closable={false}
+      closable={true}
       footer={null}
       styles={{
         maxHeight: "700px",
       }}
     >
-      <h2 className="title">Add Contact</h2>
+      <h2 className="title-h1">Add Contact</h2>
       <Form onFinish={onFinishInput} form={form}>
         <p style={{ marginBottom: "10px" }}>
           Please enter at least one field: email or phone number.
@@ -94,7 +93,7 @@ export const AddcontactModal = ({ showing, onClose }) => {
         <Form.Item name="note">
           <Input />
         </Form.Item>
-        <div className="action">
+        <div className="action-btn">
           <Button type="primary" color="blue" ghost onClick={onClose}>
             Cancel
           </Button>
@@ -106,3 +105,5 @@ export const AddcontactModal = ({ showing, onClose }) => {
     </Modal>
   );
 };
+
+export default AddcontactModal
