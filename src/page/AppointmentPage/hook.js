@@ -5,17 +5,32 @@ import { useContext, useEffect, useState } from "react";
 export const useAppointment = () => {
   const contactModal = useCustomModal();
   const getContactModal = useCustomModal();
-  const { listContact = [], vehicleInfo = [], dispatchGetListContact, dispatchGetVehicleInfo } = useContext(MainContext);
+  const [isSelectMode, setIsSelectMode] = useState(true);
+  const { listContact = [], vehicleInfo = [], 
+    dispatchGetListContact, dispatchGetVehicleInfo, currentAppointment = {},
+    dispatchSubmitClient } = useContext(MainContext);
   useEffect(() => {
       dispatchGetListContact();
       dispatchGetVehicleInfo();
   } ,[])
+
+  const onChangeMode = () => {
+    setIsSelectMode(!isSelectMode);
+  }
+
+  const onResetClient = () => {
+    dispatchSubmitClient({});
+  }
 
   return {
     listContact,
     vehicleInfo,
     contactModal,
     getContactModal,
-    dispatchGetVehicleInfo
+    isSelectMode,
+    onChangeMode,
+    currentAppointment,
+    dispatchGetVehicleInfo,
+    onResetClient
   };
 };

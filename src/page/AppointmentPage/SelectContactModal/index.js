@@ -4,17 +4,15 @@ import { useCallback, useContext, useState } from "react";
 import { MainContext } from "@/service/StoreContext";
 import ico_add from "@/assets/images/ButtonAdd.png";
 import Image from "next/image";
-import { SearchOutlined } from "@ant-design/icons-svg";
+import { SearchOutlined } from "@ant-design/icons";
 import { useAppointment } from "../hook";
 import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
-import { useShowToast } from "@/util/hooks";
 
 const { Search } = Input;
-const SelectContactModal = ({ showing, onClose, onSubmit }) => {
-  const [form] = Form.useForm();
+const SelectContactModal = ({ showing, onClose }) => {
   const { listContact } = useAppointment();
-  const { dispatchAddContact, dispatchGetListContact } =
+  const { dispatchSubmitClient } =
     useContext(MainContext);
   const [selectItem, setSelectItem] = useState({});
 
@@ -27,7 +25,7 @@ const SelectContactModal = ({ showing, onClose, onSubmit }) => {
     if (isEmpty(selectItem)) {
       //showToast("Please select client");
     } else {
-      onSubmit(item);
+      dispatchSubmitClient(selectItem);
       onClose();
     }
   }, [selectItem]);
@@ -98,9 +96,6 @@ const SelectContactModal = ({ showing, onClose, onSubmit }) => {
           </Button>
         </div>
       </div>
-      <Select>
-    <Select.Option value="sample">Sample</Select.Option>
-  </Select>
     </Modal>
   );
 };
