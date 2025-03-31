@@ -28,6 +28,7 @@ const Step1Cpn = () => {
     isSelectMode,
     currentAppointment,
     onResetClient,
+    dispatchSetStepAppointment,
   } = useAppointment();
 
   const {
@@ -38,16 +39,15 @@ const Step1Cpn = () => {
   } = vehicleInfo || {};
 
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{ position: "relative" }}>
+      <h2 className="h2__white">Client information</h2>
       <div className="main-form">
         <p>Contact</p>
         {isEmpty(currentAppointment?.client) ? (
           <div className="div__left_outside">
             <div className="div__left" onClick={getContactModal.show} />
-						<span className="div__left_inner">
-						Select
-						</span>
-						<i className="arrow down"></i>
+            <span className="div__left_inner">Select</span>
+            <i className="arrow down"></i>
             <Image
               src={ico_add}
               width={40}
@@ -126,7 +126,9 @@ const Step1Cpn = () => {
           </div>
         )}
         <div className="submit">
-          <Button type="primary">Next</Button>
+          <Button type="primary" onClick={() => dispatchSetStepAppointment(2)}>
+            Next
+          </Button>
         </div>
       </div>
       <AddcontactModal

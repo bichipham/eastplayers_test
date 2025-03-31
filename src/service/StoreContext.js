@@ -6,7 +6,7 @@ const MainContext = createContext();
 const initialState = {
   listContact: [],
   currentAppointment: {},
-  stepAppointment: 1
+  stepAppointment: 2
 };
 
 const StoreProvider = ({ children }) => {
@@ -46,10 +46,10 @@ const StoreProvider = ({ children }) => {
     });
   }
 
-  const dispatchSetStepAppointment = (client) => {
+  const dispatchSetStepAppointment = (step) => {
     dispatch({
       type: `SET_STEP_APPOINTMENT`,
-      payload: client,
+      payload: step,
     });
   }
 

@@ -23,7 +23,7 @@ export const StoreReducer = (state, action) => {
       console.log('!!!!! SET_STEP_APPOINTMENT ', action?.payload);
       return {
         ...state,
-        appointmentStep: action?.payload,
+        stepAppointment: action?.payload,
       };
     }
     default:

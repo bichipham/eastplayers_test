@@ -17,7 +17,6 @@ const AppointmentPage = () => {
   return (
     <div className="main-page">
       <div className="div__header" />
-      <h2 className="h2__white">Client information</h2>
       <div style={{ display: "flex" }}>
         {stepAppointment == 1 ? <Step1Cpn /> : <Step2Cpn />}
         <div className="status">
