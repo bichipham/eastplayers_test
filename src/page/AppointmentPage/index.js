@@ -9,28 +9,21 @@ import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
 import SelectContactModal from "./SelectContactModal";
 import Step1Cpn from "./Step1Cpn";
+import Step2Cpn from "./Step2Cpn";
 
 const AppointmentPage = () => {
-  const {
-    contactModal,
-    getContactModal,
-    onChangeMode,
-    vehicleInfo,
-    isSelectMode,
-    currentAppointment,
-    onResetClient,
-  } = useAppointment();
+  const { contactModal, getContactModal, stepAppointment } = useAppointment();
 
   return (
     <div className="main-page">
       <div className="div__header" />
       <h2 className="h2__white">Client information</h2>
       <div style={{ display: "flex" }}>
-        <Step1Cpn />
+        {stepAppointment == 1 ? <Step1Cpn /> : <Step2Cpn />}
         <div className="status">
           <Steps
             direction="vertical"
-            current={1}
+            current={stepAppointment}
             items={[
               {
                 title: "Step 1",

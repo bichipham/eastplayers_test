@@ -175,7 +175,7 @@
     display: inline-block;
     line-height: 8px;
 }
-.div_inline  .div__inline_info:nth-child(0){
+.div_inline  .div__inline_info:nth-child(2){
     border-left: none!important;
 }
 .div_inline .close{

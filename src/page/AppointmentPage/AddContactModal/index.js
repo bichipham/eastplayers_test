@@ -2,10 +2,12 @@ import { Button, Input, Modal, Form, message } from "antd";
 import "./style.css";
 import { useContext } from "react";
 import { MainContext } from "@/service/StoreContext";
+import { makeid } from "@/util/helpers";
 
 const AddcontactModal = ({ showing, onClose }) => {
   const [form] = Form.useForm();
-  const { dispatchAddContact, dispatchGetListContact, dispatchSubmitClient } = useContext(MainContext);
+  const { dispatchAddContact, dispatchGetListContact, dispatchSubmitClient } =
+    useContext(MainContext);
   const onFinishInput = (payload) => {
     const { email, phone, name, note, add_phone } = payload || {};
     if (!email && !phone && !add_phone) {
@@ -25,18 +27,19 @@ const AddcontactModal = ({ showing, onClose }) => {
       ]);
       return;
     }
-    console.log('!!!!!! add contact ' ,payload);
+    // console.log('!!!!!! add contact ' ,payload);
+    const objWithID = { id: makeid(), ...payload };
     dispatchAddContact({
-      data: payload,
-      callback: res => {
+      data: objWithID,
+      callback: (res) => {
         message.info("Action Success");
-        dispatchSubmitClient(payload);
+        dispatchSubmitClient(objWithID);
         dispatchGetListContact();
       },
-      handleError: err => {
+      handleError: (err) => {
         message.error("Action Fail");
-      }
-    })
+      },
+    });
     onClose();
   };
 
@@ -107,4 +110,4 @@ const AddcontactModal = ({ showing, onClose }) => {
   );
 };
 
-export default AddcontactModal
+export default AddcontactModal;

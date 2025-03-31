@@ -8,7 +8,7 @@ export const useAppointment = () => {
   const [isSelectMode, setIsSelectMode] = useState(true);
   const { listContact = [], vehicleInfo = [], 
     dispatchGetListContact, dispatchGetVehicleInfo, currentAppointment = {},
-    dispatchSubmitClient } = useContext(MainContext);
+    dispatchSubmitClient, stepAppointment } = useContext(MainContext);
   useEffect(() => {
       dispatchGetListContact();
       dispatchGetVehicleInfo();
@@ -31,6 +31,7 @@ export const useAppointment = () => {
     onChangeMode,
     currentAppointment,
     dispatchGetVehicleInfo,
+    stepAppointment,
     onResetClient
   };
 };

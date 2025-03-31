@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             <NavBar />
             <div className="center-cnt">
               <div className="div__back">
-                <Image src={ico_back} width={30} height={30} />
+                <Image src={ico_back} width={30} height={30} alt="back" />
                 <span>Create Appointment</span>
               </div>
               {children}

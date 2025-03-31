@@ -5,7 +5,8 @@ const MainContext = createContext();
 
 const initialState = {
   listContact: [],
-  currentAppointment: {}
+  currentAppointment: {},
+  stepAppointment: 1
 };
 
 const StoreProvider = ({ children }) => {
@@ -40,7 +41,14 @@ const StoreProvider = ({ children }) => {
 
   const dispatchSubmitClient = (client) => {
     dispatch({
-      type: `GET_SUBMIT_CLIENT`,
+      type: `SUBMIT_CLIENT`,
+      payload: client,
+    });
+  }
+
+  const dispatchSetStepAppointment = (client) => {
+    dispatch({
+      type: `SET_STEP_APPOINTMENT`,
       payload: client,
     });
   }
@@ -63,6 +71,7 @@ const StoreProvider = ({ children }) => {
     dispatchGetVehicleInfo,
     dispatchAddContact,
     dispatchSubmitClient,
+    dispatchSetStepAppointment,
     ...state,
   };
   //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));

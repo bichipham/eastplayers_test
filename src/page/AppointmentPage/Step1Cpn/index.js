@@ -37,20 +37,6 @@ const Step1Cpn = () => {
     modal: listModal = [],
   } = vehicleInfo || {};
 
-	const renderContactInfo = () => {
-		const contactMap = new Map(Object.entries(currentAppointment?.client));
-		console.log('!!!!!1 ',contactMap);
-		return (
-			<>
-			{map(contactMap, item => (
-				  <div className="div__inline_info">
-					<span>{item.value}</span>
-				</div>)
-			)}
-			</>
-		)
-	}
-
   return (
     <div style={{position: 'relative'}}>
       <div className="main-form">
@@ -61,7 +47,7 @@ const Step1Cpn = () => {
 						<span className="div__left_inner">
 						Select
 						</span>
-						<i class="arrow down"></i>
+						<i className="arrow down"></i>
             <Image
               src={ico_add}
               width={40}
@@ -73,14 +59,13 @@ const Step1Cpn = () => {
         ) : (
           <div className="div_inline">
             <span className="title">Client</span>
-            {/* {map(Object.entries(currentAppointment?.client), (item) =>
-              item.key !== 'id' ? (
+            {map(Object.values(currentAppointment?.client), (item, index) =>
+              index !== 0 && item ? (
                 <div className="div__inline_info">
-                  <span>{item.value}</span>
+                  <span>{item}</span>
                 </div>
               ) : null
-            )} */}
-						{renderContactInfo()}
+            )}
             <span className="close" onClick={onResetClient}>
               x
             </span>
