@@ -66,12 +66,26 @@ const StoreProvider = ({ children }) => {
     });
   };
 
+  const dispatchGetListPackage = () => {
+    console.log("!!!!! dispatchGetListPackage");
+    fetchAPI({
+      url: `/packages`,
+      payload: { method: "GET" },
+    }).then((res) => {
+      dispatch({
+        type: `GET_LIST_PACKAGE`,
+        payload: res,
+      });
+    });
+  };
+
   const contextValues = {
     dispatchGetListContact,
     dispatchGetVehicleInfo,
     dispatchAddContact,
     dispatchSubmitClient,
     dispatchSetStepAppointment,
+    dispatchGetListPackage,
     ...state,
   };
   //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));

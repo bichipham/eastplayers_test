@@ -84,3 +84,25 @@ table .w200 {
   width: 200px;
 }
 
+table .w250 {
+  width: 250px;
+}
+table .w300 {
+  width: 300px;
+}
+table .w350 {
+  width: 350px;
+}
+
+tr td {
+  border-bottom: 1px solid gray;
+}
+
+td {
+  padding: 8px;
+}
+th {
+  padding: 12px;
+  text-align: left;
+  color: white;
+}

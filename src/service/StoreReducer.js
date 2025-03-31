@@ -26,6 +26,14 @@ export const StoreReducer = (state, action) => {
         stepAppointment: action?.payload,
       };
     }
+
+    case "GET_LIST_PACKAGE": {
+      return {
+        ...state,
+        listPackage: action.payload,
+      };
+    }
+    
     default:
       return state;
   }

@@ -2,7 +2,7 @@
     position: relative;
 }
 .main-form {
-    width: 1000px;
+    width: 1400px;
     background-color: #18181B;
     padding: 20px;
     margin-left: 15px;
@@ -198,3 +198,10 @@
     border: none!important;
 }
 
+.div__nodata {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+	flex-direction: column;
+	align-items: center;
+}

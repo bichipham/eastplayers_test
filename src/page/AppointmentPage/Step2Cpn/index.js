@@ -1,23 +1,15 @@
 "use client";
-import { Select, Button } from "antd";
+import { Button } from "antd";
 import "../style.css";
 import icoNodata from "@/assets/images/icoNoData.png";
 import Image from "next/image";
 import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
-import { useAppointment } from "../hook";
+import SelectPackageModal from "../SelectPackageModal";
+import useSelectPackage from "./hook";
 
 const Step2Cpn = () => {
-  const {
-    contactModal,
-    getContactModal,
-    onChangeMode,
-    vehicleInfo,
-    isSelectMode,
-    currentAppointment,
-    onResetClient,
-  } = useAppointment();
-
+  const { addPackageModal } = useSelectPackage();
   return (
     <div style={{ position: "relative" }}>
       <h2 className="h2__white">Service</h2>
@@ -30,7 +22,7 @@ const Step2Cpn = () => {
           <div
             className="div__left"
             style={{ width: "100%", float: "none" }}
-            onClick={getContactModal.show}
+            onClick={addPackageModal.show}
           />
           <span className="div__left_inner">Select</span>
           <i className="arrow down" style={{ left: `calc(100% - 18px)` }}></i>
@@ -38,7 +30,7 @@ const Step2Cpn = () => {
         <div>
           <div className="div__nodata">
             <Image src={icoNodata} width={100} height={100} alt="no data" />
-						<p>The selected packages will appear here</p>
+            <p>The selected packages will appear here</p>
           </div>
         </div>
         <div className="action-btn">
@@ -48,6 +40,7 @@ const Step2Cpn = () => {
           <Button type="primary">Next</Button>
         </div>
       </div>
+      <SelectPackageModal showing={addPackageModal.isShowing} onClose={addPackageModal.hide}   />
     </div>
   );
 };
