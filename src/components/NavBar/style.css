@@ -19,7 +19,7 @@
     border-radius: 0px;
 }
 
-ant-menu-light .ant-menu-item-selected{
+.ant-menu-light .ant-menu-item-selected{
     background: none!important;
     border-right: 2px solid #2E7FF1!important;
     color: #2E7FF1!important;

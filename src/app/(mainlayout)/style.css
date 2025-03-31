@@ -24,3 +24,18 @@
     min-height: 100vh;
     margin-left: 0px; 
   }
+
+  .div__back {
+    display: flex;
+    height: 75px;
+    align-items: center;
+  }
+
+  .div__back img{
+    margin-left: 15px;
+  }
+
+  .div__back span{
+    font-size: 20px;
+    margin-left: 10px;
+  }

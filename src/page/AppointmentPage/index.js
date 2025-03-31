@@ -1,15 +1,5 @@
 "use client";
-import {
-  Checkbox,
-  Tag,
-  Input,
-  Form,
-  InputNumber,
-  Row,
-  Select,
-  Steps,
-  Button,
-} from "antd";
+import { Steps } from "antd";
 import "./style.css";
 import ico_add from "@/assets/images/ButtonAdd.png";
 import Image from "next/image";
@@ -31,19 +21,10 @@ const AppointmentPage = () => {
     onResetClient,
   } = useAppointment();
 
-  const {
-    year: listYear = [],
-    make: listMake = [],
-    type: listType = [],
-    modal: listModal = [],
-  } = vehicleInfo || {};
-
   return (
     <div className="main-page">
-      {" "}
-      <div className="div__header">
-        <h2 className="mh_ttl">Client information</h2>
-      </div>
+      <div className="div__header" />
+      <h2 className="h2__white">Client information</h2>
       <div style={{ display: "flex" }}>
         <Step1Cpn />
         <div className="status">
