@@ -227,6 +227,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
             <div
               className={`list-row-item
 						 ${isSelected(children?.id) ? "selected" : ""}`}
+						 key={children?.id}
             >
               <RowItem item={children} />
               <div style={{ width: "100px", textAlign: "end" }}>
