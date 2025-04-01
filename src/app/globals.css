@@ -45,13 +45,14 @@ body {
   margin-bottom: 10px;
 }
 
-.tableFixHead table thead th.text-left {
+.table thead th.text-left {
   text-align: left;
 }
 
-.tableFixHead table thead th.text-right {
+.table thead th.text-right {
   text-align: right;
 }
+
 
 .tableFixHead table tbody td {
   vertical-align: top;
@@ -105,4 +106,12 @@ th {
   padding: 12px;
   text-align: left;
   color: white;
+}
+
+.ant-table-wrapper .ant-table {
+  background-color: black;
+}
+
+.ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
+   background: gray;
 }
