@@ -13,14 +13,14 @@ export const StoreReducer = (state, action) => {
       };
     }
     case "SUBMIT_CLIENT": {
-      console.log('!!!!! SUBMIT_CLIENT ', action?.payload);
+      // console.log('!!!!! SUBMIT_CLIENT ', action?.payload);
       return {
         ...state,
         currentAppointment: { ...state.currentAppointment, client: action?.payload },
       };
     }
     case "SET_STEP_APPOINTMENT": {
-      console.log('!!!!! SET_STEP_APPOINTMENT ', action?.payload);
+      // console.log('!!!!! SET_STEP_APPOINTMENT ', action?.payload);
       return {
         ...state,
         stepAppointment: action?.payload,

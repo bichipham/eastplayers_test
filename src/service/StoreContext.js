@@ -13,7 +13,7 @@ const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(StoreReducer, initialState);
 
   const dispatchAddContact = ({ data, callback, handleError }) => {
-    console.log("!!!!! dispatch ADD contact");
+    // console.log("!!!!! dispatch ADD contact");
     fetchAPI({
       url: "/contacts",
       payload: { method: "POST", data: data },
@@ -27,7 +27,7 @@ const StoreProvider = ({ children }) => {
   };
 
   const dispatchGetListContact = () => {
-    console.log("!!!!! dispatchGetListContact");
+    // console.log("!!!!! dispatchGetListContact");
     fetchAPI({
       url: `/contacts`,
       payload: { method: "GET" },
@@ -54,7 +54,7 @@ const StoreProvider = ({ children }) => {
   }
 
   const dispatchGetVehicleInfo = () => {
-    console.log("!!!!! dispatchGetVerhicleInfo");
+    // console.log("!!!!! dispatchGetVerhicleInfo");
     fetchAPI({
       url: `/vehicleInfo`,
       payload: { method: "GET" },
@@ -67,7 +67,7 @@ const StoreProvider = ({ children }) => {
   };
 
   const dispatchGetListPackage = () => {
-    console.log("!!!!! dispatchGetListPackage");
+    // console.log("!!!!! dispatchGetListPackage");
     fetchAPI({
       url: `/packages`,
       payload: { method: "GET" },

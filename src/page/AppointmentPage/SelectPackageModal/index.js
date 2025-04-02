@@ -1,5 +1,5 @@
 import { Button, Input, Modal, Checkbox, Table, Collapse } from "antd";
-import "./style.css";
+import "../tableStyle.css";
 import Image from "next/image";
 import { SearchOutlined } from "@ant-design/icons";
 import { useAppointment } from "../hook";
@@ -68,7 +68,6 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
   ];
 
   const onSelectItem = (checked, record = []) => {
-    console.log("!!!!!! checked ", checked, record);
     let list = listSelectItem;
     if (checked) {
       list = [...listSelectItem, ...record];
@@ -101,55 +100,24 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
         placeholder="Search"
         suffix={<SearchOutlined style={{ color: "rgba(0,0,0,.45)" }} />}
       />
-
-      <div className="table-style">
-        {/* <Table
-          columns={columns}
-          dataSource={data}
-        /> */}
-        {/* <table>
-          <thead>
-            <tr>
-              <th className="text-left w350">Package Name</th>
-              <th className="text-left w350">Service</th>
-              <th className="text-left w250">Price</th>
-              <th className="text-left w250">Estimate time</th>
-              <th className="text-left w150">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {map(listPackage, (item) => (
-              <tr key={item?.id}>
-                <td className="text-left w350">
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src={iconPackage}
-                      alt="package"
-                      width={50}
-                      height={50}
-                      style={{ marginRight: "5px" }}
-                    />
-                    {item?.name}
-                  </div>
-                </td>
-                <td className="text-left w350">{item?.service}</td>
-                <td className="text-left w250">{item?.price}</td>
-                <td className="text-left w250">{item?.time}</td>
-                <td className="text-left w150">
-                  <Collapse
-                    items={[
-                      {
-                        key: "1",
-                        label: "expand",
-                        children: <p>{'text'}</p>,
-                      },
-                    ]}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
+      <div className="table-body">
+        <div className="list-row-item-header">
+          <div className="text-left" style={{ width: "350px" }}>
+            Package Name
+          </div>
+          <div className="text-left" style={{ width: "350px" }}>
+            Service
+          </div>
+          <div className="text-left" style={{ width: "200px" }}>
+            Price
+          </div>
+          <div className="text-left" style={{ width: "200px" }}>
+            Estimate Time
+          </div>
+          <div className="text-left" style={{ width: "150px" }}>
+            Action
+          </div>
+        </div>
         <div>
           {map(listPackage, (item) => (
             <RowBlock
@@ -160,13 +128,16 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
             />
           ))}
         </div>
-        <div className="action-btn">
+     
+      </div>
+			<div className="action-btn">
           <Button type="primary" color="blue" ghost onClick={onClose}>
             Cancel
           </Button>
-          <Button type="primary" onClick={() => onSubmit(listSelectItem)}>Next</Button>
+          <Button type="primary" onClick={() => onSubmit(listSelectItem)}>
+            Next
+          </Button>
         </div>
-      </div>
     </Modal>
   );
 };
@@ -174,7 +145,6 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
 export default SelectPackageModal;
 
 const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
-  console.log("!!!!!1 listSelectItem ", listSelectItem);
   const [expand, setExpand] = useState(true);
   const [selectAll, setSelectAll] = useState(false);
   const haveChildren = !isEmpty(item?.children);
@@ -202,7 +172,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
               height={30}
               alt=""
               onClick={() => setExpand(!expand)}
-							style={{float: 'right'}}
+              style={{ float: "right", cursor: 'pointer' }}
             />
           ) : (
             <Checkbox
@@ -217,6 +187,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
             style={{
               display: "flex",
               justifyContent: "flex-end",
+							marginRight: '10px'
             }}
           >
             <a onClick={() => setSelectAll(!selectAll)}>{`${
@@ -227,7 +198,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
             <div
               className={`list-row-item
 						 ${isSelected(children?.id) ? "selected" : ""}`}
-						 key={children?.id}
+              key={children?.id}
             >
               <RowItem item={children} />
               <div style={{ width: "100px", textAlign: "end" }}>

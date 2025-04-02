@@ -9,56 +9,12 @@ import SelectPackageModal from "../SelectPackageModal";
 import useSelectPackage from "./hook";
 import iconPackage from "@/assets/images/icoPackage.png";
 import iconOption from "@/assets/images/iconOption.png";
+import TableData from "./TableData";
 
 const Step2Cpn = () => {
   const { addPackageModal, onSelectCallback, selectList } = useSelectPackage();
   console.log("!!!! selectList ", selectList);
 
-  const columns = [
-    {
-      title: "Package Name",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      render: (text, record) => (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Image
-            src={record?.isOption ? iconOption : iconPackage}
-            alt="package"
-            width={50}
-            height={50}
-            style={{ marginRight: "5px" }}
-          />
-          {record?.name}
-        </div>
-      ),
-    },
-    {
-      title: "Service",
-      dataIndex: "service",
-      key: "service",
-      width: "30%",
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      width: "20%",
-      key: "price",
-    },
-    {
-      title: "Estimate time",
-      dataIndex: "time",
-      width: "10%",
-      key: "time",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (text, record) => (
-        <div style={{ display: "flex", flexDirection: "column" }}></div>
-      ),
-    },
-  ];
 
   return (
     <div style={{ position: "relative" }}>
@@ -85,7 +41,7 @@ const Step2Cpn = () => {
             </div>
           ) : (
             <div>
-              <Table columns={columns} dataSource={selectList} />
+             <TableData data={selectList} />
             </div>
           )}
         </div>
