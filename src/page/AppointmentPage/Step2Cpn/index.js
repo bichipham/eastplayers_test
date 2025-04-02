@@ -12,9 +12,7 @@ import iconOption from "@/assets/images/iconOption.png";
 import TableData from "./TableData";
 
 const Step2Cpn = () => {
-  const { addPackageModal, onSelectCallback, selectList } = useSelectPackage();
-  console.log("!!!! selectList ", selectList);
-
+  const { addPackageModal, onSelectCallback, selectList, onRemoveItem } = useSelectPackage();
 
   return (
     <div style={{ position: "relative" }}>
@@ -41,7 +39,7 @@ const Step2Cpn = () => {
             </div>
           ) : (
             <div>
-             <TableData data={selectList} />
+             <TableData data={selectList} onRemoveItem={onRemoveItem} />
             </div>
           )}
         </div>

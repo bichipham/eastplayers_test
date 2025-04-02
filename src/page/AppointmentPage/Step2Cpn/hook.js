@@ -1,7 +1,7 @@
 import { MainContext } from "@/service/StoreContext";
 import { useCustomModal } from "@/util/hooks";
-import { find, findIndex, forEach } from "lodash";
-import { useContext, useEffect, useState } from "react";
+import { cloneDeep, filter, find, findIndex, forEach, isEmpty } from "lodash";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 const useSelectPackage = () => {
   const { dispatchGetListPackage, listPackage = [] } = useContext(MainContext);
@@ -27,23 +27,48 @@ const useSelectPackage = () => {
     //group by package
     let groupList = [];
     const result = groupBy(selectList, (c) => c.idPackage);
-    console.log("!!!!!!!!!!!!!! result ", result);
 
     for (const [key, value] of Object.entries(result)) {
-      console.log("!!!!!! key value ", key, value);
       if (key == "undefined") {
-        groupList = [...groupList, ...value]
+        groupList = [...groupList, ...value];
       } else {
         const rootPackage = findPackageRoot(key);
-				console.log("!!!!!! find root ", key, rootPackage);
+        //find package root
         rootPackage["children"] = value;
-        groupList = [...groupList, rootPackage]
+        groupList = [...groupList, rootPackage];
       }
     }
-
     setSelectList(groupList);
     addPackageModal.hide();
   };
+
+  const onRemoveItem = useCallback(
+    ({ deleteId, rootId = "" }) => {
+      // console.log("!!!! onRemoveItem ", deleteId, rootId);
+      if (!rootId) {
+        const filterLlist = filter(selectList, (item) => item?.id !== deleteId);
+        setSelectList(filterLlist);
+      } else {
+        let tmpList = cloneDeep(selectList);
+        let rootIndex = findIndex(selectList, (item) => item?.id == rootId);
+        tmpList[rootIndex].children = filter( // delete chilren option
+          tmpList[rootIndex].children,
+          (item) => item?.id !== deleteId
+        );
+
+        if (isEmpty(tmpList[rootIndex].children)) { // delete root package
+          const filterLlist = filter(
+            selectList,
+            (item) => item?.id !== rootId
+          );
+          setSelectList(filterLlist);
+          return;
+        }
+        setSelectList(tmpList);
+      }
+    },
+    [selectList]
+  );
 
   return {
     dispatchGetListPackage,
@@ -51,6 +76,7 @@ const useSelectPackage = () => {
     addPackageModal,
     onSelectCallback,
     selectList,
+    onRemoveItem,
   };
 };
 

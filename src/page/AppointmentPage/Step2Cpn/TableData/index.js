@@ -6,7 +6,7 @@ import { Input } from "antd";
 import icoTrash from "@/assets/images/trash.png";
 import "../../tableStyle.css";
 
-const TableData = ({ data }) => {
+const TableData = ({ data, onRemoveItem }) => {
   return (
     <div className="table-body">
       <div className="list-row-item-header">
@@ -28,14 +28,14 @@ const TableData = ({ data }) => {
       </div>
       <div>
         {map(data, (item) => (
-          <RowBlock item={item} key={item?.id} />
+          <RowBlock item={item} key={`row-block-${item?.id}`} onRemoveItem={onRemoveItem} />
         ))}
       </div>
     </div>
   );
 };
 
-const RowBlock = ({ item }) => {
+const RowBlock = ({ item, onRemoveItem }) => {
   const haveChildren = !isEmpty(item?.children);
 
   return (
@@ -43,7 +43,14 @@ const RowBlock = ({ item }) => {
       <div className={`list-row-item ${haveChildren ? "expandable" : ""}`}>
         <RowItem item={item} isRootPackage={haveChildren} />
         <div style={{ width: "150px", textAlign: "end" }}>
-					<Image src={icoTrash} width={30} height={30} alt="" style={{cursor: 'pointer'}} />
+          <Image
+            src={icoTrash}
+            width={30}
+            height={30}
+            alt=""
+            style={{ cursor: "pointer" }}
+            onClick={() => onRemoveItem({ deleteId: item?.id })}
+          />
         </div>
       </div>
       {haveChildren ? (
@@ -51,7 +58,21 @@ const RowBlock = ({ item }) => {
           {map(item?.children, (children) => (
             <div className={`list-row-item`} key={children?.id}>
               <RowItem item={children} />
-              <div style={{ width: "100px", textAlign: "end" }}><Image style={{cursor: 'pointer'}} src={icoTrash} width={30} height={30} alt="" /></div>
+              <div style={{ width: "100px", textAlign: "end" }}>
+                <Image
+                  style={{ cursor: "pointer" }}
+                  src={icoTrash}
+                  width={30}
+                  height={30}
+                  alt=""
+                  onClick={() =>
+                    onRemoveItem({
+                      deleteId: children?.id,
+                      rootId: children?.idPackage,
+                    })
+                  }
+                />
+              </div>
             </div>
           ))}
         </>
@@ -66,6 +87,7 @@ const RowItem = ({ item, isRootPackage = false }) => {
       <div
         style={{ display: "flex", alignItems: "center", width: "350px" }}
         className="text-left"
+				id={`row-item-${item?.id}`}
       >
         <Image
           src={item?.isOption ? iconOption : iconPackage}
