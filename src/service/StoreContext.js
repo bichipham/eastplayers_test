@@ -6,7 +6,7 @@ const MainContext = createContext();
 const initialState = {
   listContact: [],
   currentAppointment: {},
-  stepAppointment: 2
+  stepAppointment: 1
 };
 
 const StoreProvider = ({ children }) => {

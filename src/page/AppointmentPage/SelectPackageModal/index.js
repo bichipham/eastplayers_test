@@ -102,21 +102,19 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
       />
       <div className="table-body">
         <div className="list-row-item-header">
-          <div className="text-left" style={{ width: "350px" }}>
+          <div className="text-left" style={{ width: "250px" }}>
             Package Name
           </div>
-          <div className="text-left" style={{ width: "350px" }}>
+          <div className="text-left" style={{ width: "250px" }}>
             Service
           </div>
-          <div className="text-left" style={{ width: "200px" }}>
+          <div className="text-left" style={{ width: "150px" }}>
             Price
           </div>
-          <div className="text-left" style={{ width: "200px" }}>
+          <div className="text-left" style={{ width: "100px" }}>
             Estimate Time
           </div>
-          <div className="text-left" style={{ width: "150px" }}>
-            Action
-          </div>
+          <div className="text-left">Action</div>
         </div>
         <div>
           {map(listPackage, (item) => (
@@ -128,16 +126,15 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
             />
           ))}
         </div>
-     
       </div>
-			<div className="action-btn">
-          <Button type="primary" color="blue" ghost onClick={onClose}>
-            Cancel
-          </Button>
-          <Button type="primary" onClick={() => onSubmit(listSelectItem)}>
-            Next
-          </Button>
-        </div>
+      <div className="action-btn">
+        <Button type="primary" color="blue" ghost onClick={onClose}>
+          Cancel
+        </Button>
+        <Button type="primary" onClick={() => onSubmit(listSelectItem)}>
+          Next
+        </Button>
+      </div>
     </Modal>
   );
 };
@@ -164,7 +161,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
         } ${isSelected(item?.id) ? "selected" : ""}`}
       >
         <RowItem item={item} />
-        <div style={{ width: "150px", textAlign: "end" }}>
+        <div style={{ textAlign: "end" }}>
           {haveChildren ? (
             <Image
               src={!expand ? iconDown : iconUp}
@@ -172,7 +169,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
               height={30}
               alt=""
               onClick={() => setExpand(!expand)}
-              style={{ float: "right", cursor: 'pointer' }}
+              style={{ float: "right", cursor: "pointer" }}
             />
           ) : (
             <Checkbox
@@ -187,7 +184,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
             style={{
               display: "flex",
               justifyContent: "flex-end",
-							marginRight: '10px'
+              marginRight: "10px",
             }}
           >
             <a onClick={() => setSelectAll(!selectAll)}>{`${
@@ -201,7 +198,7 @@ const RowBlock = ({ item, onSelectItem, listSelectItem }) => {
               key={children?.id}
             >
               <RowItem item={children} />
-              <div style={{ width: "100px", textAlign: "end" }}>
+              <div style={{ textAlign: "end" }}>
                 <Checkbox
                   onChange={(e) => onSelectItem(e.target.checked, [children])}
                   checked={isSelected(children?.id)}
@@ -219,7 +216,7 @@ const RowItem = ({ item }) => {
   return (
     <>
       <div
-        style={{ display: "flex", alignItems: "center", width: "350px" }}
+        style={{ display: "flex", alignItems: "center", width: "250px" }}
         className="text-left"
       >
         <Image
@@ -231,14 +228,14 @@ const RowItem = ({ item }) => {
         />
         {item?.name}
       </div>
-      <div className="text-left" style={{ width: "350px" }}>
-        {item?.service}
+      <div className="text-left" style={{ width: "250px" }}>
+        <p>{item?.service} &nbsp;</p>
       </div>
-      <div className="text-left" style={{ width: "200px" }}>
-        {item?.price}
+      <div className="text-left" style={{ width: "150px" }}>
+        <p>{item?.price} &nbsp;</p>
       </div>
-      <div className="text-left" style={{ width: "200px" }}>
-        {item?.time}
+      <div className="text-left" style={{ width: "100px" }}>
+        <p>{item?.time} &nbsp;</p>
       </div>
     </>
   );

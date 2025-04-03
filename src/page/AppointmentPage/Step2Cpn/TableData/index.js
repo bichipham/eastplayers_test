@@ -10,25 +10,27 @@ const TableData = ({ data, onRemoveItem }) => {
   return (
     <div className="table-body">
       <div className="list-row-item-header">
-        <div className="text-left" style={{ width: "350px" }}>
+        <div className="text-left" style={{ width: "250px" }}>
           Package Name
         </div>
-        <div className="text-left" style={{ width: "350px" }}>
+        <div className="text-left" style={{ width: "250px" }}>
           Service
         </div>
-        <div className="text-left" style={{ width: "200px" }}>
+        <div className="text-left" style={{ width: "150px" }}>
           Price
         </div>
-        <div className="text-left" style={{ width: "200px" }}>
+        <div className="text-left" style={{ width: "100px" }}>
           Estimate Time
         </div>
-        <div className="text-left" style={{ width: "150px" }}>
-          Action
-        </div>
+        <div className="text-left" style={{marginRight: '2px'}} >Action</div>
       </div>
       <div>
         {map(data, (item) => (
-          <RowBlock item={item} key={`row-block-${item?.id}`} onRemoveItem={onRemoveItem} />
+          <RowBlock
+            item={item}
+            key={`row-block-${item?.id}`}
+            onRemoveItem={onRemoveItem}
+          />
         ))}
       </div>
     </div>
@@ -42,7 +44,7 @@ const RowBlock = ({ item, onRemoveItem }) => {
     <>
       <div className={`list-row-item ${haveChildren ? "expandable" : ""}`}>
         <RowItem item={item} isRootPackage={haveChildren} />
-        <div style={{ width: "150px", textAlign: "end" }}>
+        <div style={{ textAlign: "end" }}>
           <Image
             src={icoTrash}
             width={30}
@@ -58,7 +60,7 @@ const RowBlock = ({ item, onRemoveItem }) => {
           {map(item?.children, (children) => (
             <div className={`list-row-item`} key={children?.id}>
               <RowItem item={children} />
-              <div style={{ width: "100px", textAlign: "end" }}>
+              <div style={{ textAlign: "end" }}>
                 <Image
                   style={{ cursor: "pointer" }}
                   src={icoTrash}
@@ -85,9 +87,9 @@ const RowItem = ({ item, isRootPackage = false }) => {
   return (
     <>
       <div
-        style={{ display: "flex", alignItems: "center", width: "350px" }}
+        style={{ display: "flex", alignItems: "center", width: "250px" }}
         className="text-left"
-				id={`row-item-${item?.id}`}
+        id={`row-item-${item?.id}`}
       >
         <Image
           src={item?.isOption ? iconOption : iconPackage}
@@ -98,19 +100,15 @@ const RowItem = ({ item, isRootPackage = false }) => {
         />
         {item?.name}
       </div>
-      <div className="text-left" style={{ width: "350px" }}>
-        {item?.service}
+      <div className="text-left" style={{ width: "250px" }}>
+        <p>{item?.service} &nbsp;</p>
       </div>
-      {isRootPackage ? null : (
-        <div className="text-left" style={{ width: "200px" }}>
-          <Input defaultValue={item?.price} />
-        </div>
-      )}
-      {isRootPackage ? null : (
-        <div className="text-left" style={{ width: "200px" }}>
-          <Input defaultValue={item?.time} />
-        </div>
-      )}
+      <div className="text-left" style={{ width: "150px" }}>
+        {isRootPackage ? <p>&nbsp;</p> : <Input defaultValue={item?.price} />}
+      </div>
+      <div className="text-left" style={{ width: "100px" }}>
+        {isRootPackage ? <p>&nbsp;</p> : <Input defaultValue={item?.time} />}
+      </div>
     </>
   );
 };

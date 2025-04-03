@@ -12,14 +12,13 @@
 .popup-main .ant-modal-content {
     box-shadow: none;
     background: black;
-
 }
 .popup-main p {
     color: white;
 }
 
 .popup-main .ant-input-outlined {
-    background-color: #2F323E;
+    background-color: red;
     border: none;
-    color: white
+    color: blue
 }

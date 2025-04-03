@@ -38,10 +38,12 @@ const Step1Cpn = () => {
     modal: listModal = [],
   } = vehicleInfo || {};
 
+  const onSubmitForm = (payload) => {};
+
   return (
     <div style={{ position: "relative" }}>
       <h2 className="h2__white">Client information</h2>
-      <div className="main-form">
+      <Form className="main-form" onFinish={onSubmitForm}  layout="vertical">
         <p>Contact</p>
         {isEmpty(currentAppointment?.client) ? (
           <div className="div__left_outside">
@@ -75,46 +77,106 @@ const Step1Cpn = () => {
         <div className="div__detail">
           <div className="col2">
             <div className="col2-item">
-              <p style={{ marginTop: "10px" }}>Year</p>
-              <Select
-                placeholder="Select"
-                className="select__item"
-                dropdownStyle={{ backgroundColor: "black" }}
-                options={map(listYear, (item, index) => {
-                  return { key: index, value: item };
-                })}
-              />
+              <Form.Item
+                label="Year"
+                name="year"
+                layout="vertical"
+                rules={[
+                  {
+                    required: true,
+                    message: "Required",
+                  },
+                ]}
+              >
+                {isSelectMode ? (
+                  <Select
+                    placeholder="Select"
+                    className="select__item"
+                    dropdownStyle={{ backgroundColor: "black" }}
+                    options={map(listYear, (item, index) => {
+                      return { key: index, value: item };
+                    })}
+                  />
+                ) : (
+                  <Input placeholder="Enter" />
+                )}
+              </Form.Item>
             </div>
             <div className="col2-item">
-              <p style={{ marginTop: "10px" }}>Make</p>
+              <Form.Item
+                label="Make"
+                name="make"
+                layout="vertical"
+                rules={[
+                  {
+                    required: true,
+                    message: "Required",
+                  },
+                ]}
+              >
+                {isSelectMode ? (
+                  <Select
+                    placeholder="Select"
+                    className="select__item"
+                    dropdownStyle={{ backgroundColor: "black" }}
+                    options={map(listMake, (item, index) => {
+                      return { key: index, value: item };
+                    })}
+                  />
+                ) : (
+                  <Input placeholder="Enter" />
+                )}
+              </Form.Item>
+            </div>
+          </div>
+          <Form.Item
+            label="Modal"
+            name="modal"
+            layout="vertical"
+            rules={[
+              {
+                required: true,
+                message: "Required",
+              },
+            ]}
+          >
+            {isSelectMode ? (
               <Select
                 placeholder="Select"
                 className="select__item"
                 dropdownStyle={{ backgroundColor: "black" }}
-                options={map(listMake, (item, index) => {
+                options={map(listModal, (item, index) => {
                   return { key: index, value: item };
                 })}
               />
-            </div>
-          </div>
-          <p style={{ marginTop: "10px" }}>Modal</p>
-          <Select
-            placeholder="Select"
-            className="select__item"
-            dropdownStyle={{ backgroundColor: "black" }}
-            options={map(listModal, (item, index) => {
-              return { key: index, value: item };
-            })}
-          />
-          <p style={{ marginTop: "10px" }}>Vehicle Type</p>
-          <Select
-            placeholder="Select"
-            className="select__item"
-            dropdownStyle={{ backgroundColor: "black" }}
-            options={map(listType, (item, index) => {
-              return { key: index, value: item };
-            })}
-          />
+            ) : (
+              <Input placeholder="Enter" />
+            )}
+          </Form.Item>
+          <Form.Item
+            label="Type"
+            name="type"
+            layout="vertical"
+            rules={[
+              {
+                required: true,
+                message: "Required",
+              },
+            ]}
+          >
+            {isSelectMode ? (
+              <Select
+                placeholder="Select"
+                className="select__item"
+                dropdownStyle={{ backgroundColor: "black" }}
+                options={map(listType, (item, index) => {
+                  return { key: index, value: item };
+                })}
+              />
+            ) : (
+              <Input placeholder="Enter" />
+            )}
+          </Form.Item>
         </div>
         {isSelectMode ? (
           <div className="div__link" onClick={onChangeMode}>
@@ -126,11 +188,11 @@ const Step1Cpn = () => {
           </div>
         )}
         <div className="submit">
-          <Button type="primary" onClick={() => dispatchSetStepAppointment(2)}>
+          <Button type="primary" htmlType="submit">
             Next
           </Button>
         </div>
-      </div>
+      </Form>
       <AddcontactModal
         showing={contactModal.isShowing}
         onClose={contactModal.hide}

@@ -198,10 +198,56 @@
     border: none!important;
 }
 
+.ant-form-item-vertical .ant-form-item-label >label {
+    color: white;
+}
+.ant-form-item-vertical {
+    /* margin-bottom: 55px; */
+}
+.ant-select.ant-select-in-form-item  {
+    height: 45px;
+}
+
+.main-form .ant-input-outlined {
+    background-color: #2F323E;
+    border: none;
+    color: white
+}
+
 .div__nodata {
 	display: flex;
 	justify-content: center;
 	padding: 20px;
 	flex-direction: column;
 	align-items: center;
+}
+
+textarea,
+select,
+input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  background-color: #2F323E;
+  color: white;
+  height: 45px;
+}
+
+.label,
+section > label {
+  line-height: 2;
+  text-align: left;
+  display: block;
+  margin-bottom: 13px;
+  margin-top: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 200;
 }

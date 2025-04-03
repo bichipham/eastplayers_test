@@ -3,16 +3,17 @@ import { Button, Table } from "antd";
 import "../style.css";
 import icoNodata from "@/assets/images/icoNoData.png";
 import Image from "next/image";
-import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
 import SelectPackageModal from "../SelectPackageModal";
 import useSelectPackage from "./hook";
-import iconPackage from "@/assets/images/icoPackage.png";
-import iconOption from "@/assets/images/iconOption.png";
 import TableData from "./TableData";
+import { useContext } from "react";
+import { MainContext } from "@/service/StoreContext";
 
 const Step2Cpn = () => {
-  const { addPackageModal, onSelectCallback, selectList, onRemoveItem } = useSelectPackage();
+  const { addPackageModal, onSelectCallback, selectList, onRemoveItem } =
+    useSelectPackage();
+  const { dispatchSetStepAppointment } = useContext(MainContext);
 
   return (
     <div style={{ position: "relative" }}>
@@ -39,13 +40,13 @@ const Step2Cpn = () => {
             </div>
           ) : (
             <div>
-             <TableData data={selectList} onRemoveItem={onRemoveItem} />
+              <TableData data={selectList} onRemoveItem={onRemoveItem} />
             </div>
           )}
         </div>
         <div className="action-btn">
-          <Button type="primary" color="blue" ghost>
-            Cancel
+          <Button type="primary" color="blue" ghost onClick={() => dispatchSetStepAppointment(1)} >
+            Back
           </Button>
           <Button type="primary">Next</Button>
         </div>
