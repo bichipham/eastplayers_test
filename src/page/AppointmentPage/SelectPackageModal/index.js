@@ -19,54 +19,6 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
   const { listPackage } = useContext(MainContext);
   const [listSelectItem, setListSelectItem] = useState([]);
 
-  const columns = [
-    {
-      title: "Package Name",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      render: (text, record) => (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Image
-            src={record?.isOption ? iconOption : iconPackage}
-            alt="package"
-            width={50}
-            height={50}
-            style={{ marginRight: "5px" }}
-          />
-          {record?.name}
-        </div>
-      ),
-    },
-    {
-      title: "Service",
-      dataIndex: "service",
-      key: "service",
-      width: "30%",
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      width: "20%",
-      key: "price",
-    },
-    {
-      title: "Estimate time",
-      dataIndex: "time",
-      width: "10%",
-      key: "time",
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (text, record) => (
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <Checkbox onChange={(e) => onSelectItem(e.target.checked, record)} />
-        </div>
-      ),
-    },
-  ];
-
   const onSelectItem = (checked, record = []) => {
     let list = listSelectItem;
     if (checked) {

@@ -13,7 +13,6 @@ export const StoreReducer = (state, action) => {
       };
     }
     case "SUBMIT_CLIENT": {
-      // console.log('!!!!! SUBMIT_CLIENT ', action?.payload);
       return {
         ...state,
         currentAppointment: { ...state.currentAppointment, client: action?.payload },
@@ -26,10 +25,15 @@ export const StoreReducer = (state, action) => {
       };
     }
     case "SET_STEP_APPOINTMENT": {
-      // console.log('!!!!! SET_STEP_APPOINTMENT ', action?.payload);
       return {
         ...state,
         stepAppointment: action?.payload,
+      };
+    }
+    case "SUBMIT_PACKAGE": {
+      return {
+        ...state,
+        currentAppointment: { ...state.currentAppointment, package: action?.payload },
       };
     }
 

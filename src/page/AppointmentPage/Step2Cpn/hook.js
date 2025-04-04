@@ -4,9 +4,9 @@ import { cloneDeep, filter, find, findIndex, forEach, isEmpty } from "lodash";
 import { useCallback, useContext, useEffect, useState } from "react";
 
 const useSelectPackage = () => {
-  const { dispatchGetListPackage, listPackage = [] } = useContext(MainContext);
+  const { dispatchGetListPackage, listPackage = [], dispatchSubmitPackage, currentAppointment } = useContext(MainContext);
   const addPackageModal = useCustomModal();
-  const [selectList, setSelectList] = useState([]);
+  const [selectList, setSelectList] = useState(currentAppointment?.package || []);
 
   useEffect(() => {
     dispatchGetListPackage();
@@ -39,15 +39,16 @@ const useSelectPackage = () => {
       }
     }
     setSelectList(groupList);
+    dispatchSubmitPackage(groupList);
     addPackageModal.hide();
   };
 
   const onRemoveItem = useCallback(
     ({ deleteId, rootId = "" }) => {
-      // console.log("!!!! onRemoveItem ", deleteId, rootId);
       if (!rootId) {
         const filterLlist = filter(selectList, (item) => item?.id !== deleteId);
         setSelectList(filterLlist);
+        dispatchSubmitPackage(filterLlist);
       } else {
         let tmpList = cloneDeep(selectList);
         let rootIndex = findIndex(selectList, (item) => item?.id == rootId);
@@ -65,6 +66,7 @@ const useSelectPackage = () => {
           return;
         }
         setSelectList(tmpList);
+        dispatchSubmitPackage(tmpList);
       }
     },
     [selectList]

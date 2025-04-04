@@ -16,12 +16,12 @@ export const fetchAPI = async ({ url, payload }) => {
       throw new Error("API Request not ok status = ", res.status);
     } else {
       const data = await res?.json();
-      console.log(
-        "[DEBUG] API Request= %s ; RequestData= %s ; Response= %s",
-        fullUrl,
-        JSON.stringify(requestData),
-        JSON.stringify(data)
-      );
+      // console.log(
+      //   "[DEBUG] API Request= %s ; RequestData= %s ; Response= %s",
+      //   fullUrl,
+      //   JSON.stringify(requestData),
+      //   JSON.stringify(data)
+      // );
       if (data?.result_code == "FAILURE") {
         throw new Error("API Request FAILURE");
       } else return data;

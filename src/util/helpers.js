@@ -9,3 +9,24 @@ export const makeid = (length = 5) => {
     }
     return result;
 }
+
+export const removeAccents = (str) => {
+  let strRemoveAccents = str;
+  try {
+    strRemoveAccents = str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D");
+  } catch (error) {
+    console.log(error);
+  }
+  return strRemoveAccents;
+};
+
+export const searchTextRemoveAccent = (str, keyword) => {
+  if (!str || !keyword) return false;
+  let strRemoveAccent = removeAccents((str + "").toLowerCase());
+  let keywordRemoveAccent = removeAccents(keyword.toLowerCase());
+  return strRemoveAccent.includes(keywordRemoveAccent);
+};

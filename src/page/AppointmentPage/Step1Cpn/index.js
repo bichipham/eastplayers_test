@@ -1,13 +1,8 @@
 "use client";
 import {
-  Checkbox,
-  Tag,
   Input,
   Form,
-  InputNumber,
-  Row,
   Select,
-  Steps,
   Button,
   message,
 } from "antd";
@@ -19,7 +14,8 @@ import isEmpty from "lodash/isEmpty";
 import { useAppointment } from "../hook";
 import SelectContactModal from "../SelectContactModal";
 import AddcontactModal from "../AddContactModal";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { MainContext } from "@/service/StoreContext";
 
 const Step1Cpn = () => {
   const {
@@ -30,9 +26,14 @@ const Step1Cpn = () => {
     isSelectMode,
     currentAppointment,
     onResetClient,
+  } = useAppointment();
+
+  const {
     dispatchSetStepAppointment,
     dispatchSubmitVehicle,
-  } = useAppointment();
+    dispatchGetVehicleInfo,
+    dispatchGetListContact,
+  } = useContext(MainContext);
 
   const {
     year: listYear = [],
@@ -43,6 +44,11 @@ const Step1Cpn = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    dispatchGetListContact();
+    dispatchGetVehicleInfo();
+  }, []);
 
   const onSubmitForm = (payload) => {
     if (isEmpty(currentAppointment?.client)) {
@@ -59,13 +65,18 @@ const Step1Cpn = () => {
       modal: currentAppointment?.vehicle?.modal,
       type: currentAppointment?.vehicle?.type,
       make: currentAppointment?.vehicle?.make,
-    })
-  } ,[])
+    });
+  }, []);
 
   return (
     <div style={{ position: "relative" }}>
       <h2 className="h2__white">Client information</h2>
-      <Form className="main-form" onFinish={onSubmitForm} layout="vertical" form={form}>
+      <Form
+        className="main-form"
+        onFinish={onSubmitForm}
+        layout="vertical"
+        form={form}
+      >
         <p>Contact</p>
         {isEmpty(currentAppointment?.client) ? (
           <div className="div__left_outside">
@@ -115,8 +126,14 @@ const Step1Cpn = () => {
                     placeholder="Select"
                     className="select__item"
                     dropdownStyle={{ backgroundColor: "black" }}
+                    showSearch
+                    filterOption={(input, option) => {
+                      return (option?.label?.toString() ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase());
+                    }}
                     options={map(listYear, (item, index) => {
-                      return { key: index, value: item };
+                      return { value: item, label: item };
                     })}
                   />
                 ) : (
@@ -141,8 +158,14 @@ const Step1Cpn = () => {
                     placeholder="Select"
                     className="select__item"
                     dropdownStyle={{ backgroundColor: "black" }}
+                    showSearch
+                    filterOption={(input, option) => {
+                      return (option?.label?.toString() ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase());
+                    }}
                     options={map(listMake, (item, index) => {
-                      return { key: index, value: item };
+                      return { value: item, label: item };
                     })}
                   />
                 ) : (
@@ -167,8 +190,14 @@ const Step1Cpn = () => {
                 placeholder="Select"
                 className="select__item"
                 dropdownStyle={{ backgroundColor: "black" }}
+                showSearch
+                filterOption={(input, option) => {
+                  return (option?.label?.toString() ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase());
+                }}
                 options={map(listModal, (item, index) => {
-                  return { key: index, value: item };
+                  return { value: item, label: item };
                 })}
               />
             ) : (
@@ -191,8 +220,14 @@ const Step1Cpn = () => {
                 placeholder="Select"
                 className="select__item"
                 dropdownStyle={{ backgroundColor: "black" }}
+                showSearch
+                filterOption={(input, option) => {
+                  return (option?.label?.toString() ?? "")
+                    .toLowerCase()
+                    .includes(input.toLowerCase());
+                }}
                 options={map(listType, (item, index) => {
-                  return { key: index, value: item };
+                  return { value: index, label: item };
                 })}
               />
             ) : (

@@ -1,6 +1,6 @@
 import { Button, Input, Modal, Form, Checkbox, message } from "antd";
 import "./style.css";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { MainContext } from "@/service/StoreContext";
 import ico_add from "@/assets/images/ButtonAdd.png";
 import Image from "next/image";
@@ -8,19 +8,21 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useAppointment } from "../hook";
 import map from "lodash/map";
 import isEmpty from "lodash/isEmpty";
+import { removeAccents, searchTextRemoveAccent } from "@/util/helpers";
+import debounce from "lodash/debounce";
 
 const { Search } = Input;
 const SelectContactModal = ({ showing, onClose }) => {
-  const { listContact } = useAppointment();
-  const { dispatchSubmitClient } =
-    useContext(MainContext);
+  const { listContact = [] } = useAppointment();
+  const [filerListContact, setFilerListContact] = useState(listContact);
+  const [keyword, setKeyword] = useState("");
+  const { dispatchSubmitClient } = useContext(MainContext);
   const [selectItem, setSelectItem] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
 
   const onChangeSelectRequest = (checked, item) => {
     setSelectItem(checked ? item : {});
   };
-
 
   const onSelectClient = useCallback(() => {
     if (isEmpty(selectItem)) {
@@ -30,6 +32,27 @@ const SelectContactModal = ({ showing, onClose }) => {
       onClose();
     }
   }, [selectItem]);
+
+  const debounceSearchLocal = useCallback(
+    debounce((nextValue) => setKeyword(nextValue?.target?.value), 500),
+    []
+  );
+
+  useEffect(() => {
+    if (isEmpty(keyword)) {
+      setFilerListContact(listContact);
+      return;
+    }
+    const filteredData = listContact?.filter(
+      (entry) =>
+        searchTextRemoveAccent(entry?.name, keyword) ||
+        searchTextRemoveAccent(entry?.phone, keyword) ||
+        searchTextRemoveAccent(entry?.email, keyword) ||
+        searchTextRemoveAccent(entry?.note, keyword)
+    );
+    console.log("!!!!1 handle search ", filteredData, keyword);
+    setFilerListContact(filteredData);
+  }, [keyword, listContact]);
 
   return (
     <Modal
@@ -51,6 +74,7 @@ const SelectContactModal = ({ showing, onClose }) => {
           placeholder="Search"
           className="search-left"
           suffix={<SearchOutlined style={{ color: "rgba(0,0,0,.45)" }} />}
+          onChange={debounceSearchLocal}
         />
         <Image
           src={ico_add}
@@ -71,7 +95,7 @@ const SelectContactModal = ({ showing, onClose }) => {
             </tr>
           </thead>
           <tbody>
-            {map(listContact, (item) => (
+            {map(filerListContact, (item) => (
               <tr key={item?.id}>
                 <td className="text-left w200">{item?.name}</td>
                 <td className="text-left w200">{item?.email}</td>

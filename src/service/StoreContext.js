@@ -13,7 +13,6 @@ const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(StoreReducer, initialState);
 
   const dispatchAddContact = ({ data, callback, handleError }) => {
-    // console.log("!!!!! dispatch ADD contact");
     fetchAPI({
       url: "/contacts",
       payload: { method: "POST", data: data },
@@ -27,7 +26,6 @@ const StoreProvider = ({ children }) => {
   };
 
   const dispatchGetListContact = () => {
-    // console.log("!!!!! dispatchGetListContact");
     fetchAPI({
       url: `/contacts`,
       payload: { method: "GET" },
@@ -53,6 +51,13 @@ const StoreProvider = ({ children }) => {
     });
   }
 
+  const dispatchSubmitPackage = packages => {
+    dispatch({
+      type: `SUBMIT_PACKAGE`,
+      payload: packages,
+    });
+  }
+
   const dispatchSetStepAppointment = (step) => {
     dispatch({
       type: `SET_STEP_APPOINTMENT`,
@@ -61,7 +66,6 @@ const StoreProvider = ({ children }) => {
   }
 
   const dispatchGetVehicleInfo = () => {
-    // console.log("!!!!! dispatchGetVerhicleInfo");
     fetchAPI({
       url: `/vehicleInfo`,
       payload: { method: "GET" },
@@ -74,7 +78,6 @@ const StoreProvider = ({ children }) => {
   };
 
   const dispatchGetListPackage = () => {
-    // console.log("!!!!! dispatchGetListPackage");
     fetchAPI({
       url: `/packages`,
       payload: { method: "GET" },
@@ -94,6 +97,7 @@ const StoreProvider = ({ children }) => {
     dispatchSetStepAppointment,
     dispatchGetListPackage,
     dispatchSubmitVehicle,
+    dispatchSubmitPackage,
     ...state,
   };
   //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));
