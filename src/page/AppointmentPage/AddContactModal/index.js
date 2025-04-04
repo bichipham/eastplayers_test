@@ -8,6 +8,7 @@ const AddcontactModal = ({ showing, onClose }) => {
   const [form] = Form.useForm();
   const { dispatchAddContact, dispatchGetListContact, dispatchSubmitClient } =
     useContext(MainContext);
+  const [messageApi, contextHolder] = message.useMessage();
   const onFinishInput = (payload) => {
     const { email, phone, name, note, add_phone } = payload || {};
     if (!email && !phone && !add_phone) {
@@ -106,6 +107,7 @@ const AddcontactModal = ({ showing, onClose }) => {
           </Button>
         </div>
       </Form>
+      {contextHolder}
     </Modal>
   );
 };

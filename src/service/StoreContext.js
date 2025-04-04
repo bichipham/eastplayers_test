@@ -46,6 +46,13 @@ const StoreProvider = ({ children }) => {
     });
   }
 
+  const dispatchSubmitVehicle = (vehicle) => {
+    dispatch({
+      type: `SUBMIT_VEHICLE`,
+      payload: vehicle,
+    });
+  }
+
   const dispatchSetStepAppointment = (step) => {
     dispatch({
       type: `SET_STEP_APPOINTMENT`,
@@ -86,6 +93,7 @@ const StoreProvider = ({ children }) => {
     dispatchSubmitClient,
     dispatchSetStepAppointment,
     dispatchGetListPackage,
+    dispatchSubmitVehicle,
     ...state,
   };
   //console.log('!!!!!!!!!!! bichi contextValues ' + JSON.stringify(contextValues));

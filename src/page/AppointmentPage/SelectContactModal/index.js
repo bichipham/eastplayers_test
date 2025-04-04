@@ -1,4 +1,4 @@
-import { Button, Input, Modal, Form, Checkbox, message, Select } from "antd";
+import { Button, Input, Modal, Form, Checkbox, message } from "antd";
 import "./style.css";
 import { useCallback, useContext, useState } from "react";
 import { MainContext } from "@/service/StoreContext";
@@ -15,6 +15,7 @@ const SelectContactModal = ({ showing, onClose }) => {
   const { dispatchSubmitClient } =
     useContext(MainContext);
   const [selectItem, setSelectItem] = useState({});
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onChangeSelectRequest = (checked, item) => {
     setSelectItem(checked ? item : {});
@@ -23,7 +24,7 @@ const SelectContactModal = ({ showing, onClose }) => {
 
   const onSelectClient = useCallback(() => {
     if (isEmpty(selectItem)) {
-      //showToast("Please select client");
+      messageApi.info("Please select client");
     } else {
       dispatchSubmitClient(selectItem);
       onClose();
@@ -96,6 +97,7 @@ const SelectContactModal = ({ showing, onClose }) => {
           </Button>
         </div>
       </div>
+      {contextHolder}
     </Modal>
   );
 };

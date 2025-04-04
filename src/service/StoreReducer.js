@@ -19,6 +19,12 @@ export const StoreReducer = (state, action) => {
         currentAppointment: { ...state.currentAppointment, client: action?.payload },
       };
     }
+    case "SUBMIT_VEHICLE": {
+      return {
+        ...state,
+        currentAppointment: { ...state.currentAppointment, vehicle: action?.payload },
+      };
+    }
     case "SET_STEP_APPOINTMENT": {
       // console.log('!!!!! SET_STEP_APPOINTMENT ', action?.payload);
       return {

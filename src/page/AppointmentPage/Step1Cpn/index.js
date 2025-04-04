@@ -9,6 +9,7 @@ import {
   Select,
   Steps,
   Button,
+  message,
 } from "antd";
 import "../style.css";
 import ico_add from "@/assets/images/ButtonAdd.png";
@@ -18,6 +19,7 @@ import isEmpty from "lodash/isEmpty";
 import { useAppointment } from "../hook";
 import SelectContactModal from "../SelectContactModal";
 import AddcontactModal from "../AddContactModal";
+import { useEffect } from "react";
 
 const Step1Cpn = () => {
   const {
@@ -29,6 +31,7 @@ const Step1Cpn = () => {
     currentAppointment,
     onResetClient,
     dispatchSetStepAppointment,
+    dispatchSubmitVehicle,
   } = useAppointment();
 
   const {
@@ -38,12 +41,31 @@ const Step1Cpn = () => {
     modal: listModal = [],
   } = vehicleInfo || {};
 
-  const onSubmitForm = (payload) => {};
+  const [messageApi, contextHolder] = message.useMessage();
+  const [form] = Form.useForm();
+
+  const onSubmitForm = (payload) => {
+    if (isEmpty(currentAppointment?.client)) {
+      messageApi.info("Please select client");
+      return;
+    }
+    dispatchSubmitVehicle(payload);
+    dispatchSetStepAppointment(2);
+  };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      year: currentAppointment?.vehicle?.year,
+      modal: currentAppointment?.vehicle?.modal,
+      type: currentAppointment?.vehicle?.type,
+      make: currentAppointment?.vehicle?.make,
+    })
+  } ,[])
 
   return (
     <div style={{ position: "relative" }}>
       <h2 className="h2__white">Client information</h2>
-      <Form className="main-form" onFinish={onSubmitForm}  layout="vertical">
+      <Form className="main-form" onFinish={onSubmitForm} layout="vertical" form={form}>
         <p>Contact</p>
         {isEmpty(currentAppointment?.client) ? (
           <div className="div__left_outside">
@@ -193,6 +215,7 @@ const Step1Cpn = () => {
           </Button>
         </div>
       </Form>
+      {contextHolder}
       <AddcontactModal
         showing={contactModal.isShowing}
         onClose={contactModal.hide}

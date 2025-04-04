@@ -115,3 +115,7 @@ th {
 .ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
    /* background: gray; */
 }
+
+.ant-message .ant-message-notice-wrapper .ant-message-custom-content span {
+  color: black;
+}
