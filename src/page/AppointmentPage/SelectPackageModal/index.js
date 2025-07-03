@@ -20,6 +20,7 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
   const [listSelectItem, setListSelectItem] = useState([]);
  // test rebase 1
  
+  // test yy
   const onSelectItem = (checked, record = []) => {
     let list = listSelectItem;
     if (checked) {
