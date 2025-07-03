@@ -14,7 +14,7 @@ const Step2Cpn = () => {
   const { addPackageModal, onSelectCallback, selectList, onRemoveItem } =
     useSelectPackage();
   const { dispatchSetStepAppointment } = useContext(MainContext);
-
+// nhanh 1 doi 2
   return (
     <div style={{ position: "relative" }}>
       <h2 className="h2__white">Service</h2>
