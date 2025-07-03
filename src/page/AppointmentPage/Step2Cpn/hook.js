@@ -7,6 +7,7 @@ const useSelectPackage = () => {
   const { dispatchGetListPackage, listPackage = [], dispatchSubmitPackage, currentAppointment } = useContext(MainContext);
   const addPackageModal = useCustomModal();
   const [selectList, setSelectList] = useState(currentAppointment?.package || []);
+  // nhanh 1 doi 1
 
   useEffect(() => {
     dispatchGetListPackage();
