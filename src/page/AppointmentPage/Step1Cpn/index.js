@@ -16,7 +16,7 @@ import SelectContactModal from "../SelectContactModal";
 import AddcontactModal from "../AddContactModal";
 import { useContext, useEffect } from "react";
 import { MainContext } from "@/service/StoreContext";
-
+// nhanh 1 doi 5
 const Step1Cpn = () => {
   const {
     contactModal,
