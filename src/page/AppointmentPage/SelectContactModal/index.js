@@ -52,6 +52,7 @@ const SelectContactModal = ({ showing, onClose }) => {
     );
     console.log("!!!!1 handle search ", filteredData, keyword);
     setFilerListContact(filteredData);
+    //test xx
   }, [keyword, listContact]);
 
   return (

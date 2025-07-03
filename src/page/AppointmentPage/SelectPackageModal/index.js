@@ -19,6 +19,7 @@ const SelectPackageModal = ({ showing, onClose, onSubmit }) => {
   const { listPackage } = useContext(MainContext);
   const [listSelectItem, setListSelectItem] = useState([]);
  // test rebase 1
+ 
   const onSelectItem = (checked, record = []) => {
     let list = listSelectItem;
     if (checked) {
